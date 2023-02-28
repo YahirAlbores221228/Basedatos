@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 // Definicion del esquema a utilizar para la coleccion usuario
 const TodoSchema = new mongoose.Schema({
+Profile: {
+type: File
+},
   Nombre: {
     type: String,
     required: true,

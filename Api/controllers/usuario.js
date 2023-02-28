@@ -11,6 +11,7 @@ const getUsuarios = async (req, res) => {
 // Crear un objeto con el formato indicado de usuario
 const createUsuario = async (req, res) => {
   const usuario = new Usuario({
+Profile: req.body.Profile,
     Nombre: req.body.Nombre,
     Apellido: req.body.Apellido,
     Contraseña: req.body.Contraseña,
@@ -29,6 +30,7 @@ const updateUsuario = async (req, res) => {
     { _id: req.params.usuarioID },
     {
       $set: {
+Profile: req.body.Profile,
       Nombre: req.body.Nombre,
       Apellido: req.body.Apellido,
       Contraseña: req.body.Contraseña,
