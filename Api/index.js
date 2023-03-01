@@ -35,6 +35,42 @@ app.use(express.urlencoded({ extended: false }));
 // uso de router.js
 app.use(router);
 
-app.listen(PORT, async () => {
+app.post('/login', (req, res) => {
+  const Correo = req.body.Correo;
+  const Contrasena = req.body.Contrasena;
+  if (Correo === 'user@example.com' && Contrasena === 'Contrasena') {
+    // Si las credenciales son válidas, envía una respuesta exitosa al cliente
+    res.status(200).json({ message: 'Inicio de sesión exitoso' });
+  } else {
+    // Si las credenciales son inválidas, envía una respuesta de error al cliente
+    res.status(401).json({ message: 'Credenciales inválidas' });
+  }
+});
+
+app.listen(3000, () => {
+  console.log('La aplicación está escuchando en el puerto 3000.');
+});
+
+/* app.listen(PORT, async () => {
   console.log(`server up on port ${PORT}`);
+}); */
+
+
+// Crear un servidor HTTPS, ya debes tener tus archivos generados por certbot
+
+var express = require('express');
+var fs = require('fs');
+var https = require('https');
+const PUERTO = 3000;
+
+https.createServer({
+cert: fs.readFileSync('/etc/letsencrypt/archive/receita.iothings.com.mx/fullchain1.pem'),
+key: fs.readFileSync('/etc/letsencrypt/archive/receita.iothings.com.mx/privkey1.pem')
+},app).listen(PUERTO, function(){
+console.log('Servidor https corriendo en el puerto 443');
+});
+
+app.get('/', function(req, res){
+res.send('Hola, estas en la pagina inicial');
+console.log('Se recibio una petición get a través de https');
 });

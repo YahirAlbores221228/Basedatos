@@ -12,7 +12,7 @@ type: File
     type: String,
     required: true,
   },
-  Contraseña: {
+  Contrasena: {
    type: String,
     required: true,
 },

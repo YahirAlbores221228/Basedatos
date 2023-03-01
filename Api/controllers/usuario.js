@@ -14,7 +14,7 @@ const createUsuario = async (req, res) => {
 Profile: req.body.Profile,
     Nombre: req.body.Nombre,
     Apellido: req.body.Apellido,
-    Contraseña: req.body.Contraseña,
+    Contrasena: req.body.Contrasena,
     Correo: req.body.Correo,
   });
 usuario.save( async (err, usuario) => {
@@ -33,7 +33,7 @@ const updateUsuario = async (req, res) => {
 Profile: req.body.Profile,
       Nombre: req.body.Nombre,
       Apellido: req.body.Apellido,
-      Contraseña: req.body.Contraseña,
+      Contrasena: req.body.Contrasena,
       Correo: req.body.Correo,
       },
     },
