@@ -11,7 +11,7 @@ const getRestaurantes = async (req, res) => {
 // Crear un objeto con el formato indicado del restaurante
 const createRestaurante = async (req, res) => {
   const restaurante = new Restaurante({
-Profile: req.body.Profile,
+
     Nombre: req.body.Nombre,
     Tipo: req.body.Tipo,
     Ubicacion: req.body.Ubicacion,
@@ -30,7 +30,7 @@ const updateRestaurante = async (req, res) => {
     { _id: req.params.restauranteID },
     {
       $set: {
-      Profile: req.body.Profile,
+      
       Nombre: req.body.Nombre,
     Tipo: req.body.Tipo,
     Ubicacion: req.body.Ubicacion,

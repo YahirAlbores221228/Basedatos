@@ -46,10 +46,10 @@ app.post('/login', (req, res) => {
     res.status(401).json({ message: 'Credenciales inválidas' });
   }
 });
-
+/*
 app.listen(3000, () => {
   console.log('La aplicación está escuchando en el puerto 3000.');
-});
+});*/
 
 /* app.listen(PORT, async () => {
   console.log(`server up on port ${PORT}`);
@@ -58,7 +58,7 @@ app.listen(3000, () => {
 
 // Crear un servidor HTTPS, ya debes tener tus archivos generados por certbot
 
-var express = require('express');
+
 var fs = require('fs');
 var https = require('https');
 const PUERTO = 3000;
