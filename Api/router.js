@@ -10,9 +10,9 @@ deleteReceta,
 const {
   getUsuarios,
   createUsuario,
+  validLogin,
   updateUsuario,
   deleteUsuario,
-validLogin,
 } = require("./controllers/usuario");
 
 //para ingredientes
@@ -56,7 +56,7 @@ router.put("/Recetas/:recetaID", updateReceta);
 router.delete("/Recetas/:recetaID", deleteReceta);
 //rutas para coleccion usuario
 router.get("/usuarios", getUsuarios);
-router.get("/:usuariosNombre/:usuariosContrasena", validLogin);  
+router.get("/usuarios/:usuarioNOMBRE/:usuarioCONTRASENA", validLogin);
 router.post("/usuarios", createUsuario);
 router.put("/usuarios/:usuarioID", updateUsuario);
 router.delete("/usuarios/:usuarioID", deleteUsuario);

@@ -8,10 +8,39 @@ const getUsuarios = async (req, res) => {
     res.json(usuarios);
   });
 };
+
+//Validar login
+const validLogin = async (req, res) => {
+  try {
+    let username = req.params.usuarioNOMBRE
+    let password = req.params.usuarioCONTRASENA
+    const user = await Usuario.findOne({Nombre: req.params.usuarioNOMBRE}).exec()
+    if (!user) {
+      return res.status(404).send({ message: "Usuario no encontrado" })
+    } 
+    if (username === user.Nombre) {
+      if(password === user.Contrasena){
+        return res.status(200).send({ message: "Has iniciado sesion" })
+      } else {
+        return res.status(400).send({ message: "Contraseña incorrecta" })
+      }
+    } else {
+      return res.status(400).send({ message: "Nombre de usuario incorrecto" })
+    }
+  } catch (error) {
+    console.error(error)
+    return res.status(500).send({ error: "Error en el servidor" })
+  }
+};
+// hasta aqui termina el validar el login
+
+
 // Crear un objeto con el formato indicado de usuario
 const createUsuario = async (req, res) => {
-  const usuario = new Usuario({
 
+console.log(req.body); // Verificar el valor de req.body
+
+  const usuario = new Usuario({
     Nombre: req.body.Nombre,
     Apellido: req.body.Apellido,
     Contrasena: req.body.Contrasena,
@@ -30,7 +59,6 @@ const updateUsuario = async (req, res) => {
     { _id: req.params.usuarioID },
     {
       $set: {
-
       Nombre: req.body.Nombre,
       Apellido: req.body.Apellido,
       Contrasena: req.body.Contrasena,
@@ -53,36 +81,10 @@ const deleteUsuario = async (req, res) => {
 };
 
 
-
-
-//Validar login
-const validLogin = async (req, res) => {
-  try {
-    let username = req.params.usuariosNombre
-    let password = req.params.usuariosContrasena
-    const user = await Usuario.findOne({Nombre: req.params.usuariosNombre}).exec()
-    if (!user) {
-      return res.status(404).send({ message: "Usuario no encontrado" })
-    } 
-    if (username === user.Nombre) {
-      if(password === user.Contrasena){
-        return res.status(200).send({ message: "Has iniciado sesion 😀" })
-      } else {
-        return res.status(400).send({ message: "Contraseña incorrecta" })
-      }
-    } else {
-      return res.status(400).send({ message: "Nombre de usuario incorrecto" })
-    }
-  } catch (error) {
-    console.error(error)
-    return res.status(500).send({ error: "Error en el servidor" })
-  }
-};
-// hasta aqui termina el validar el login
 module.exports = {
   getUsuarios,
+  validLogin,
   createUsuario,
   updateUsuario,
   deleteUsuario,
-validLogin, // este es necesario para login
 };

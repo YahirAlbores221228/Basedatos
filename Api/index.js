@@ -36,14 +36,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(router);
 
 
-/*
-app.listen(3000, () => {
-  console.log('La aplicación está escuchando en el puerto 3000.');
-});*/
 
 /* app.listen(PORT, async () => {
+  console.log('La aplicación está escuchando en PORT.');
+});
+ */
+app.listen(PORT, async () => {
   console.log(`server up on port ${PORT}`);
-}); */
+});
 
 
 // Crear un servidor HTTPS, ya debes tener tus archivos generados por certbot
