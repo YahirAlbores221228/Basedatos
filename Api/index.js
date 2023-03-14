@@ -41,9 +41,10 @@ app.use(router);
   console.log('La aplicación está escuchando en PORT.');
 });
  */
+/*
 app.listen(PORT, async () => {
   console.log(`server up on port ${PORT}`);
-});
+});*/
 
 
 // Crear un servidor HTTPS, ya debes tener tus archivos generados por certbot
