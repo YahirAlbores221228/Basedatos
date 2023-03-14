@@ -12,7 +12,9 @@ const {
   createUsuario,
   updateUsuario,
   deleteUsuario,
+validLogin,
 } = require("./controllers/usuario");
+
 //para ingredientes
 const {
   getIngredientes,
@@ -54,6 +56,7 @@ router.put("/Recetas/:recetaID", updateReceta);
 router.delete("/Recetas/:recetaID", deleteReceta);
 //rutas para coleccion usuario
 router.get("/usuarios", getUsuarios);
+router.get("/:usuariosNombre/:usuariosContrasena", validLogin);  
 router.post("/usuarios", createUsuario);
 router.put("/usuarios/:usuarioID", updateUsuario);
 router.delete("/usuarios/:usuarioID", deleteUsuario);

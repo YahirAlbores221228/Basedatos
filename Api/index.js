@@ -35,17 +35,7 @@ app.use(express.urlencoded({ extended: false }));
 // uso de router.js
 app.use(router);
 
-app.post('/login', (req, res) => {
-  const Correo = req.body.Correo;
-  const Contrasena = req.body.Contrasena;
-  if (Correo === 'user@example.com' && Contrasena === 'Contrasena') {
-    // Si las credenciales son válidas, envía una respuesta exitosa al cliente
-    res.status(200).json({ message: 'Inicio de sesión exitoso' });
-  } else {
-    // Si las credenciales son inválidas, envía una respuesta de error al cliente
-    res.status(401).json({ message: 'Credenciales inválidas' });
-  }
-});
+
 /*
 app.listen(3000, () => {
   console.log('La aplicación está escuchando en el puerto 3000.');
