@@ -1,30 +1,32 @@
-// definicion de librerias
+//definicion de librerias
 const express = require("express");
 const router = require("./router");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
-const fileUpload = require("express-fileupload");
-import {uploadFile} from './S3.js'
-// variables de entorno
 
+
+const uploadFile = require("./S3")
+const fileUpload = require("express-fileupload");
+
+//variables de entorno
 dotenv.config();
-// Puerto 
-const PORT = process.env.PORT || 8000;
-const app = express();
-// para subir archivos
+
+
+//para subir archivos
 app.use(fileUpload({
   useTempFiles: true,
   tempFileDir: "./almacenamiento"
 }))
-
 app.post('/files', async (req, res) => {
 await uploadFile(req.files.file)
 res.json({message: 'Subido'})
 })
 
 
-
+// Puerto 
+const PORT = process.env.PORT || 8000;
+const app = express();
 // Libreria para mongodb - usa URL que debe existir en .env
 // usa la Base de datos llamada mongo y la coleccion llamada todos
 mongoose
