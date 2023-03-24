@@ -12,6 +12,11 @@ const fileUpload = require("express-fileupload");
 //variables de entorno
 dotenv.config();
 
+
+// Puerto 
+const PORT = process.env.PORT || 8000;
+const app = express();
+
 //para subir archivos
 app.use(fileUpload({
   useTempFiles: true,
@@ -20,9 +25,7 @@ app.use(fileUpload({
 
 
 
-// Puerto 
-const PORT = process.env.PORT || 8000;
-const app = express();
+
 // Libreria para mongodb - usa URL que debe existir en .env
 // usa la Base de datos llamada mongo y la coleccion llamada todos
 mongoose
