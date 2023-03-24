@@ -19,7 +19,7 @@ app.use(fileUpload({
 }))
 
 app.post('/files', async (req, res) => {
-uploadFile(req.files.file)
+await uploadFile(req.files.file)
 res.json({message: 'Subido'})
 })
 
