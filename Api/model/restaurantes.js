@@ -19,7 +19,7 @@ Contrasena: {
    type: String,
     required: true,
 },
-  imege: {
+  Imege: {
    type: String,
     required: true,
 },

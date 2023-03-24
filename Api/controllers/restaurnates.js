@@ -1,5 +1,7 @@
 const Restaurante = require("../model/restaurantes");
+const {uploadFile, getFiles} = require('../S3.js');
 // Obtener todos los objetos de restaurante
+
 const getRestaurantes = async (req, res) => {
  Restaurante.find((err, restaurantes) => {
     if (err) {
@@ -7,17 +9,19 @@ const getRestaurantes = async (req, res) => {
     }
     res.json(restaurantes);
   });
+ await getFiles()
 };
+
 // Crear un objeto con el formato indicado del restaurante
 const createRestaurante = async (req, res) => {
   const restaurante = new Restaurante({
-
     Nombre: req.body.Nombre,
     Tipo: req.body.Tipo,
     Ubicacion: req.body.Ubicacion,
- Contrasena: req.body.Contrasena,
+    Contrasena: req.body.Contrasena,
+    Imege: `https://fazt-receita-aws.s3.amazonaws.com/${req.files.file.name}`
   });
-
+ await uploadFile(req.files.file)
 restaurante.save( async (err, restaurante) => {
     if (err) {
       res.send(err);

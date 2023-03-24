@@ -1,4 +1,5 @@
 const Receta = require("../model/receta");
+const {uploadFile, getFiles} = require('../S3.js');
 const getRecetas = async (req, res) => {
   Receta.find((err, recetas) => {
     if (err) {
@@ -6,6 +7,7 @@ const getRecetas = async (req, res) => {
     }
     res.json(recetas);
   });
+ await getFiles()
 };
 const createReceta = async (req, res) => {
   const receta = new Receta({
@@ -16,6 +18,7 @@ const createReceta = async (req, res) => {
     Descripcion: req.body.Descripcion,
     Porcion: req.body.Porcion,
   });
+   await uploadFile(req.files.file);
 
   receta.save( async (err, receta) => {
     if (err) {

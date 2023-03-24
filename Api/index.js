@@ -6,22 +6,18 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 
 
-const uploadFile = require("./S3")
+
 const fileUpload = require("express-fileupload");
 
 //variables de entorno
 dotenv.config();
-
 
 //para subir archivos
 app.use(fileUpload({
   useTempFiles: true,
   tempFileDir: "./almacenamiento"
 }))
-app.post('/files', async (req, res) => {
-await uploadFile(req.files.file)
-res.json({message: 'Subido'})
-})
+
 
 
 // Puerto 

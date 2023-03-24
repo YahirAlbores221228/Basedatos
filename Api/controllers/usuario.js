@@ -12,6 +12,7 @@ const getUsuarios = async (req, res) => {
 //Validar login
 const validLogin = async (req, res) => {
   try {
+    
     let username = req.params.usuarioNOMBRE
     let password = req.params.usuarioCONTRASENA
     let datos = []
