@@ -4,13 +4,26 @@ const router = require("./router");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
-
+const fileUpload = require("express-fileupload");
+import {uploadFile} from './S3.js'
 // variables de entorno
-dotenv.config();
 
+dotenv.config();
 // Puerto 
 const PORT = process.env.PORT || 8000;
 const app = express();
+// para subir archivos
+app.use(fileUpload({
+  useTempFiles: true,
+  tempFileDir: "./almacenamiento"
+}))
+
+app.post('/files', async (req, res) => {
+uploadFile(req.files.file)
+res.json({message: 'Subido'})
+})
+
+
 
 // Libreria para mongodb - usa URL que debe existir en .env
 // usa la Base de datos llamada mongo y la coleccion llamada todos
@@ -25,10 +38,9 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+
 // se usa con express, peticiones cruzadas.
 app.use(cors());
-
-//
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -36,8 +48,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(router);
 
 // Crear un servidor HTTPS, ya debes tener tus archivos generados por certbot
-
-
 var fs = require('fs');
 var https = require('https');
 const PUERTO = 3000;

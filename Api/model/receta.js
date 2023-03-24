@@ -24,5 +24,9 @@ Descripcion: {
   type: Number,
     required: true,
   },
+Imege: {
+  type: String,
+    required: true,
+  },
 });
 module.exports = mongoose.model("recetas", RecetaSchema);

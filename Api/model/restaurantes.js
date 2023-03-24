@@ -14,7 +14,12 @@ const RestauranteSchema = new mongoose.Schema({
    type: String,
     required: true,
 },
+
 Contrasena: {
+   type: String,
+    required: true,
+},
+  imege: {
    type: String,
     required: true,
 },
