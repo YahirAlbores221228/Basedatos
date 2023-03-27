@@ -52,8 +52,6 @@ router.get("/", async (req, res) => {
   res.send("Let's build a CRUD API!");
 });
 
-// limites
-const rateLimit = require("express-rate-limit");
   
   //funcion para limitar peticiones
 const accountLimiter = rateLimit({

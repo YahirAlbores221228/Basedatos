@@ -24,7 +24,7 @@ Descripcion: {
   type: Number,
     required: true,
   },
-Imege: {
+Imge: {
   type: String,
     required: true,
   },
