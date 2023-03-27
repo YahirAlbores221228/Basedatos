@@ -52,27 +52,27 @@ router.get("/", async (req, res) => {
   res.send("Let's build a CRUD API!");
 });
 
-
-/*const rateLimit = require("express-rate-limit");
+// limites
+const rateLimit = require("express-rate-limit");
   
   //funcion para limitar peticiones
 const accountLimiter = rateLimit({
   windowMs: 60 * 60 * 1000, // 1 hora
-  max: 100,
+  max: 10,
   message: "Hemos recibido demasiadas peticiones de tu IP, vuelve a intentar dentro de 1 hora"
-});*/
+});
 
 
 
 // ruta get /todos
 router.get("/Recetas", getRecetas);
-router.post("/Recetas", createReceta );
-router.put("/Recetas/:recetaID", updateReceta);
-router.delete("/Recetas/:recetaID", deleteReceta);
+router.post("/Recetas", createReceta ,accountLimiter);
+router.put("/Recetas/:recetaID", updateReceta,accountLimiter);
+router.delete("/Recetas/:recetaID", deleteReceta,accountLimiter);
 //rutas para coleccion usuario
 router.get("/usuarios", getUsuarios, verifyToken);
-router.get("/usuarios/:usuarioNOMBRE/:usuarioCONTRASENA", validLogin);
-router.post("/usuarios", createUsuario);
+router.get("/usuarios/:usuarioNOMBRE/:usuarioCONTRASENA", validLogin,accountLimiter);
+router.post("/usuarios", createUsuario,accountLimiter);
 router.put("/usuarios/:usuarioID", updateUsuario, verifyToken);
 router.delete("/usuarios/:usuarioID", deleteUsuario , verifyToken);
 //rutas para la coleccion de ingredientes
@@ -82,7 +82,7 @@ router.put("/ingrediente/:ingredienteID", updateIngrediente);
 router.delete("/ingrediente/:ingredienteID", deleteIngrediente);
 //rutas para coleccion restaurantes
 router.get("/restaurante", getRestaurantes);
-router.post("/restaurante", createRestaurante);
+router.post("/restaurante", createRestaurante,accountLimiter);
 router.put("/restaurante/:restauranteID", updateRestaurante, verifyToken);
 router.delete("/restaurante/:restauranteID", deleteRestaurante, verifyToken);
 //rutas para coleccion categorias
@@ -92,7 +92,7 @@ router.put("/categoria/:categoriaID", updateCategoria);
 router.delete("/categoria/:categoriaID", deleteCategoria);
 //rutas para coleccion menu
 router.get("/menu", getMenus);
-router.post("/menu", createMenu);
+router.post("/menu", createMenu,accountLimiter);
 router.put("/menu/:menuID", updateMenu);
 router.delete("/menu/:menuID", deleteMenu);
 module.exports = router;
