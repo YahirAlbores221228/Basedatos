@@ -17,9 +17,9 @@ const createReceta = async (req, res) => {
     Precio: req.body.Precio,
     Descripcion: req.body.Descripcion,
     Porcion: req.body.Porcion,
+    Imege: `https://fazt-receita-aws.s3.amazonaws.com/${req.files.file.name}`,
   });
    await uploadFile(req.files.file);
-
   receta.save( async (err, receta) => {
     if (err) {
       res.send(err);

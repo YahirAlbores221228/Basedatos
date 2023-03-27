@@ -4,12 +4,15 @@ const Usuario = require("../model/usuario");
 const AWS = require('aws-sdk');
 
 //mandada de mensajaes
+
  const sns = new AWS.SNS({
   profile: 'receita',
   accessKeyId: 'AKIA4IDAIOVAA3XBTFXY',
   secretAccessKey: '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',
   region: 'us-east-1',
 });    
+
+
 
 // Obtener todos los objetos de usuario
 const getUsuarios = async (req, res) => {
@@ -76,6 +79,7 @@ console.log(req.body); // Verificar el valor de req.body
     }
 
 //envia los gmail
+
  let now = new Date().toString();
    let email = `Nuevo usuario registrado \n \n Enviado: ${now}`;
     let params = {
@@ -91,6 +95,8 @@ console.log(req.body); // Verificar el valor de req.body
     res.json(usuario);
   });
 };
+
+
 // actualizar un elemento a partir del _id del usuario
 const updateUsuario = async (req, res) => {
 jwt.verify(req.token, 'ReceitaSeguro', (error, authData) => {
