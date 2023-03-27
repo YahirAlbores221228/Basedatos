@@ -1,3 +1,4 @@
+const jwt = require("jsonwebtoken");
 const Restaurante = require("../model/restaurantes");
 const {uploadFile, getFiles} = require('../S3.js');
 // Obtener todos los objetos de restaurante
@@ -30,7 +31,8 @@ restaurante.save( async (err, restaurante) => {
   });
 };
 const updateRestaurante = async (req, res) => {
-  Restaurante.findOneAndUpdate(
+  jwt.verify(req.token, 'ReceitaSeguro', (error, authData) => {
+Restaurante.findOneAndUpdate(
     { _id: req.params.restauranteID },
     {
       $set: {
@@ -48,12 +50,15 @@ const updateRestaurante = async (req, res) => {
       } else res.json(Restaurante);
     }
   );
+});
 };
 // borrar un elemento a través del _id de ingrediente
 const deleteRestaurante = async (req, res) => {
-  Restaurante.deleteOne({ _id: req.params.restauranteID })
+jwt.verify(req.token, 'ReceitaSeguro', (error, authData) => {  
+Restaurante.deleteOne({ _id: req.params.restauranteID })
     .then(() => res.json({ message: "Restaurante eliminado" }))
     .catch((err) => res.send(err));
+ });
 };
 module.exports = {
   getRestaurantes,

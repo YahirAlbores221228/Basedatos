@@ -1,3 +1,5 @@
+const verifyToken = require("../Api/jwt");
+
 // definicion de rutas
 // para recetas
 const {
@@ -68,11 +70,11 @@ router.post("/Recetas", createReceta );
 router.put("/Recetas/:recetaID", updateReceta);
 router.delete("/Recetas/:recetaID", deleteReceta);
 //rutas para coleccion usuario
-router.get("/usuarios", getUsuarios);
+router.get("/usuarios", getUsuarios, verifyToken);
 router.get("/usuarios/:usuarioNOMBRE/:usuarioCONTRASENA", validLogin);
 router.post("/usuarios", createUsuario);
-router.put("/usuarios/:usuarioID", updateUsuario);
-router.delete("/usuarios/:usuarioID", deleteUsuario);
+router.put("/usuarios/:usuarioID", updateUsuario, verifyToken);
+router.delete("/usuarios/:usuarioID", deleteUsuario , verifyToken);
 //rutas para la coleccion de ingredientes
 router.get("/ingrediente", getIngredientes);
 router.post("/ingrediente", createIngrediente);
@@ -81,8 +83,8 @@ router.delete("/ingrediente/:ingredienteID", deleteIngrediente);
 //rutas para coleccion restaurantes
 router.get("/restaurante", getRestaurantes);
 router.post("/restaurante", createRestaurante);
-router.put("/restaurante/:restauranteID", updateRestaurante);
-router.delete("/restaurante/:restauranteID", deleteRestaurante);
+router.put("/restaurante/:restauranteID", updateRestaurante, verifyToken);
+router.delete("/restaurante/:restauranteID", deleteRestaurante, verifyToken);
 //rutas para coleccion categorias
 router.get("/categoria", getCategorias);
 router.post("/categoria", createCategoria);

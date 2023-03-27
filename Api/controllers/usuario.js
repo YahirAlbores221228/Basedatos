@@ -1,4 +1,6 @@
+const jwt = require("jsonwebtoken");
 const Usuario = require("../model/usuario");
+
 // const AWS = require('aws-sdk');
 
 //mandada de mensajaes
@@ -11,12 +13,15 @@ const Usuario = require("../model/usuario");
 
 // Obtener todos los objetos de usuario
 const getUsuarios = async (req, res) => {
+
+jwt.verify(req.token,'ReceitaSeguro', (error, authData) =>{
   Usuario.find((err, usuarios) => {
     if (err) {
       res.send(err);
     }
     res.json(usuarios);
   });
+});
 };
 
 //Validar login
@@ -27,7 +32,8 @@ const validLogin = async (req, res) => {
     let password = req.params.usuarioCONTRASENA
     let datos = []
     const user = await Usuario.findOne({Nombre: req.params.usuarioNOMBRE}).exec()
-    if (!user) {
+       jwt.sign({ user: user }, "ReceitaSeguro", (err, token) => {
+if (!user) {
       return res.status(404).send({ message: "Usuario no encontrado" })
     } 
     if (username === user.Nombre) {
@@ -44,6 +50,7 @@ const validLogin = async (req, res) => {
     } else {
       return res.status(400).send({ message: "Nombre de usuario incorrecto" })
     }
+       });
   } catch (error) {
     console.error(error)
     return res.status(500).send({ error: "Error en el servidor" })
@@ -86,6 +93,7 @@ console.log(req.body); // Verificar el valor de req.body
 };
 // actualizar un elemento a partir del _id del usuario
 const updateUsuario = async (req, res) => {
+jwt.verify(req.token, 'ReceitaSeguro', (error, authData) => {
   Usuario.findOneAndUpdate(
     { _id: req.params.usuarioID },
     {
@@ -103,12 +111,15 @@ const updateUsuario = async (req, res) => {
       } else res.json(Usuario);
     }
   );
+ });
 };
 // borrar un elemento a través del _id
 const deleteUsuario = async (req, res) => {
+jwt.verify(req.token, 'ReceitaSeguro', (error, authData) => {
   Usuario.deleteOne({ _id: req.params.usuarioID })
     .then(() => res.json({ message: "usuario eliminado" }))
     .catch((err) => res.send(err));
+ });
 };
 
 
