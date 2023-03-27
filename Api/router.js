@@ -1,5 +1,5 @@
 const verifyToken = require("../Api/jwt");
-
+const rateLimit = require('express-rate-limit');
 // definicion de rutas
 // para recetas
 const {
