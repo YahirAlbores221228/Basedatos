@@ -1,15 +1,15 @@
 const jwt = require("jsonwebtoken");
 const Usuario = require("../model/usuario");
 
-// const AWS = require('aws-sdk');
+const AWS = require('aws-sdk');
 
 //mandada de mensajaes
-/* const sns = new AWS.SNS({
+ const sns = new AWS.SNS({
   profile: 'receita',
   accessKeyId: 'AKIA4IDAIOVAA3XBTFXY',
   secretAccessKey: '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',
   region: 'us-east-1',
-});    */
+});    
 
 // Obtener todos los objetos de usuario
 const getUsuarios = async (req, res) => {
@@ -76,17 +76,17 @@ console.log(req.body); // Verificar el valor de req.body
     }
 
 //envia los gmail
-//  let now = new Date().toString();
-//     let email = `Nuevo usuario registrado \n \n Enviado: ${now}`;
-//     let params = {
-//         Message: email,
-//         TopicArn: 'arn:aws:sns:us-east-1:842015470912:receita'
-//     };
+ let now = new Date().toString();
+   let email = `Nuevo usuario registrado \n \n Enviado: ${now}`;
+    let params = {
+         Message: email,
+         TopicArn: 'arn:aws:sns:us-east-1:842015470912:receita'
+    };
 
-//     sns.publish(params, function(err, data) {
-//       if (err) console.log(err, err.stack); 
-//       else console.log(data);
-//     });
+   sns.publish(params, function(err, data) {
+      if (err) console.log(err, err.stack); 
+       else console.log(data);
+     });
 
     res.json(usuario);
   });

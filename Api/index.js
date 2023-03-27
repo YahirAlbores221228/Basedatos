@@ -24,8 +24,6 @@ app.use(fileUpload({
 }))
 
 
-
-
 // Libreria para mongodb - usa URL que debe existir en .env
 // usa la Base de datos llamada mongo y la coleccion llamada todos
 mongoose
