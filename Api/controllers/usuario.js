@@ -7,8 +7,8 @@ const AWS = require('aws-sdk');
 
  const sns = new AWS.SNS({
   profile: 'receita',
-  accessKeyId: 'AKIA4IDAIOVAA3XBTFXY',
-  secretAccessKey: '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',
+  accessKeyId: 'AKIA4IDAIOVAOIXBXOOW',
+  secretAccessKey: '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',
   region: 'us-east-1',
 });    
 
