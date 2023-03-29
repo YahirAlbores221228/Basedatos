@@ -2,11 +2,9 @@
 const express = require("express");
 const router = require("./router");
 const mongoose = require("mongoose");
+const rateLimit = require("express-rate-limit");
 const cors = require("cors");
 const dotenv = require("dotenv");
-
-
-
 const fileUpload = require("express-fileupload");
 
 //variables de entorno
@@ -46,7 +44,7 @@ app.use(express.urlencoded({ extended: false }));
 // uso de router.js
 app.use(router);
 
-const rateLimit = require("express-rate-limit");
+
 
 //funcion para limitar peticiones
 const accountLimiter = rateLimit({
