@@ -1,5 +1,5 @@
 const router = require("express").Router();
-
+const verifyToken = require("./jwt.js");
 // definicion de rutas
 // para recetas
 const {
@@ -66,13 +66,13 @@ router.post("/Recetas", createReceta ,accountLimiter);
 router.put("/Recetas/:recetaID", updateReceta,accountLimiter,verifyToken);
 router.delete("/Recetas/:recetaID", deleteReceta,accountLimiter);
 //rutas para coleccion usuario
-router.get("/usuarios", getUsuarios);
-router.get("/usuarios/:usuarioNOMBRE/:usuarioCONTRASENA", validLogin);
+router.get("/usuarios", getUsuarios,verifyToken);
+router.get("/usuarios/:usuarioNOMBRE/:usuarioCONTRASENA", validLogin, verifyToken);
 router.post("/usuarios", createUsuario,accountLimiter);
 router.put("/usuarios/:usuarioID", updateUsuario);
 router.delete("/usuarios/:usuarioID", deleteUsuario);
 //rutas para la coleccion de ingredientes
-router.get("/ingrediente", getIngredientes);
+router.get("/ingrediente", getIngredientes,verifyToken);
 router.post("/ingrediente", createIngrediente);
 router.put("/ingrediente/:ingredienteID", updateIngrediente,verifyToken);
 router.delete("/ingrediente/:ingredienteID", deleteIngrediente,verifyToken);
@@ -82,7 +82,7 @@ router.post("/restaurante", createRestaurante,accountLimiter);
 router.put("/restaurante/:restauranteID", updateRestaurante, verifyToken);
 router.delete("/restaurante/:restauranteID", deleteRestaurante, verifyToken);
 //rutas para coleccion categorias
-router.get("/categoria", getCategorias);
+router.get("/categoria", getCategorias,verifyToken);
 router.post("/categoria", createCategoria);
 router.put("/categoria/:categoriaID", updateCategoria,verifyToken);
 router.delete("/categoria/:categoriaID", deleteCategoria,verifyToken);
