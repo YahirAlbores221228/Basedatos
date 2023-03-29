@@ -1,6 +1,7 @@
 
 const Usuario = require("../model/usuario");
 const jwt = require("jsonwebtoken");
+const AWS = require('aws-sdk');
 //mandada de mensajaes
 
  const sns = new AWS.SNS({
@@ -10,11 +11,6 @@ const jwt = require("jsonwebtoken");
   region: 'us-east-1',
 });    
 
-let params = {
-        Protocol: 'EMAIL', 
-        TopicArn: 'reemplaza-arn',
-        Endpoint: req.body.email
-    };
 
 // Obtener todos los objetos de usuario
 const getUsuarios = async (req, res) => {

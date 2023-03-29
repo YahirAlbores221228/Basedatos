@@ -62,13 +62,13 @@ router.get("/", async (req, res) => {
 
 // ruta get /todos
 router.get("/Recetas", getRecetas);
-router.post("/Recetas", createReceta ,accountLimiter);
-router.put("/Recetas/:recetaID", updateReceta,accountLimiter,verifyToken);
-router.delete("/Recetas/:recetaID", deleteReceta,accountLimiter);
+router.post("/Recetas", createReceta);
+router.put("/Recetas/:recetaID", updateReceta,verifyToken);
+router.delete("/Recetas/:recetaID", deleteReceta);
 //rutas para coleccion usuario
 router.get("/usuarios", getUsuarios,verifyToken);
 router.get("/usuarios/:usuarioNOMBRE/:usuarioCONTRASENA", validLogin, verifyToken);
-router.post("/usuarios", createUsuario,accountLimiter);
+router.post("/usuarios", createUsuario);
 router.put("/usuarios/:usuarioID", updateUsuario);
 router.delete("/usuarios/:usuarioID", deleteUsuario);
 //rutas para la coleccion de ingredientes
@@ -78,7 +78,7 @@ router.put("/ingrediente/:ingredienteID", updateIngrediente,verifyToken);
 router.delete("/ingrediente/:ingredienteID", deleteIngrediente,verifyToken);
 //rutas para coleccion restaurantes
 router.get("/restaurante", getRestaurantes);
-router.post("/restaurante", createRestaurante,accountLimiter);
+router.post("/restaurante", createRestaurante);
 router.put("/restaurante/:restauranteID", updateRestaurante, verifyToken);
 router.delete("/restaurante/:restauranteID", deleteRestaurante, verifyToken);
 //rutas para coleccion categorias
@@ -88,7 +88,7 @@ router.put("/categoria/:categoriaID", updateCategoria,verifyToken);
 router.delete("/categoria/:categoriaID", deleteCategoria,verifyToken);
 //rutas para coleccion menu
 router.get("/menu", getMenus);
-router.post("/menu", createMenu,accountLimiter);
+router.post("/menu", createMenu);
 router.put("/menu/:menuID", updateMenu,verifyToken);
 router.delete("/menu/:menuID", deleteMenu,verifyToken);
 module.exports = router;
