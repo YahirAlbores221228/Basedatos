@@ -46,6 +46,18 @@ app.use(express.urlencoded({ extended: false }));
 // uso de router.js
 app.use(router);
 
+const rateLimit = require("express-rate-limit");
+
+//funcion para limitar peticiones
+const accountLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000, // 1 hora
+  max: 6,
+  message: "Hemos recibido demasiadas peticiones de tu IP, vuelve a intentar dentro de 1 hora"
+});
+app.get("/usuarios", accountLimiter, (req, res) => {
+  res.send('IP bloqueada ')
+});
+
 // Crear un servidor HTTPS, ya debes tener tus archivos generados por certbot
 var fs = require('fs');
 var https = require('https');

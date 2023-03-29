@@ -1,6 +1,6 @@
-const jwt = require("jsonwebtoken");
-const Usuario = require("../model/usuario");
 
+const Usuario = require("../model/usuario");
+const jwt = require("jsonwebtoken");
 const AWS = require('aws-sdk');
 
 //mandada de mensajaes
@@ -12,11 +12,14 @@ const AWS = require('aws-sdk');
   region: 'us-east-1',
 });    
 
-
+let params = {
+        Protocol: 'EMAIL', 
+        TopicArn: 'reemplaza-arn',
+        Endpoint: req.body.email
+    };
 
 // Obtener todos los objetos de usuario
 const getUsuarios = async (req, res) => {
-
 jwt.verify(req.token,'ReceitaSeguro', (error, authData) =>{
   Usuario.find((err, usuarios) => {
     if (err) {
