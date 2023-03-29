@@ -2,7 +2,7 @@
 const Usuario = require("../model/usuario");
 const jwt = require("jsonwebtoken");
 const AWS = require('aws-sdk');
-
+require("dotenv").config();
 //mandada de mensajaes
 
  const sns = new AWS.SNS({
@@ -38,7 +38,7 @@ const validLogin = async (req, res) => {
     let password = req.params.usuarioCONTRASENA
     let datos = []
     const user = await Usuario.findOne({Nombre: req.params.usuarioNOMBRE}).exec()
-       jwt.sign({ user: user }, "ReceitaSeguro", (err, token) => {
+       
 if (!user) {
       return res.status(404).send({ message: "Usuario no encontrado" })
     } 
@@ -48,6 +48,9 @@ if (!user) {
         console.log('if Password')
         datos.push(user._id, user.Nombre)
         console.log(username, password, datos)
+const token = jwt.sign({id: user._id}, process.env.AWS_SECRET_KEY, {
+          expiresIn: 60 * 60
+        })
 
         return res.status(200).send({ message: "Bienvenido" })
       } else {
@@ -56,7 +59,7 @@ if (!user) {
     } else {
       return res.status(400).send({ message: "Nombre de usuario incorrecto" })
     }
-       });
+     
   } catch (error) {
     console.error(error)
     return res.status(500).send({ error: "Error en el servidor" })
@@ -80,7 +83,9 @@ console.log(req.body); // Verificar el valor de req.body
     if (err) {
       res.send(err);
     }
-
+ const token = jwt.sign({id: usuario._id}, process.env.AWS_SECRET_KEY, {
+      expiresIn: 60 * 60
+    })
 //envia los gmail
 
  let now = new Date().toString();
@@ -95,7 +100,7 @@ console.log(req.body); // Verificar el valor de req.body
        else console.log(data);
      });
 
-    res.json(usuario);
+    res.json({auth: true, token});
   });
 };
 

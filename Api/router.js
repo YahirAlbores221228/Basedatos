@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const verifyToken = require("../Api/jwt");
+
 // definicion de rutas
 // para recetas
 const {
@@ -66,11 +66,11 @@ router.post("/Recetas", createReceta ,accountLimiter);
 router.put("/Recetas/:recetaID", updateReceta,accountLimiter,verifyToken);
 router.delete("/Recetas/:recetaID", deleteReceta,accountLimiter);
 //rutas para coleccion usuario
-router.get("/usuarios", getUsuarios, verifyToken);
+router.get("/usuarios", getUsuarios);
 router.get("/usuarios/:usuarioNOMBRE/:usuarioCONTRASENA", validLogin);
 router.post("/usuarios", createUsuario,accountLimiter);
-router.put("/usuarios/:usuarioID", updateUsuario, verifyToken);
-router.delete("/usuarios/:usuarioID", deleteUsuario , verifyToken);
+router.put("/usuarios/:usuarioID", updateUsuario);
+router.delete("/usuarios/:usuarioID", deleteUsuario);
 //rutas para la coleccion de ingredientes
 router.get("/ingrediente", getIngredientes);
 router.post("/ingrediente", createIngrediente);
